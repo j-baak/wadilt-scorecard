@@ -1,27 +1,26 @@
 # import packages
-import os, sys, json, boto3, datetime, time
+import os, boto3, datetime
 import pandas as pd
 import numpy as np
 # sys.path.append('/home/lstm/Github/vault-private')
-sys.path.append('/mnt/c/Users/jp/Documents/Github/vault-private')
-from credentials import authenticate_SMK
+# sys.path.append('/mnt/c/Users/jp/Documents/Github/vault-private')
+# from credentials import authenticate_SMK
 import plotly.express as px
 pd.options.plotting.backend = "plotly"
 # sys.path.append('/home/lstm/Github/jp-codes-ubuntu2/modules/') 
-sys.path.append('/mnt/c/users/jp/Documents/Github/jp-codes-ubuntu2/modules/')        
-from ipynb.fs.defs.module_ju_utils import define_datafolder
+# sys.path.append('/mnt/c/users/jp/Documents/Github/jp-codes-ubuntu2/modules/')        
+# from ipynb.fs.defs.module_ju_utils import define_datafolder
 import streamlit as st  # 🎈 data web app development
 from scipy import stats
 
 
 # define local data path
-local_dir = define_datafolder() + 'Data Exchange/data maintenance/predictions_on_AWS/'
+local_dir = './' #define_datafolder()
 local_dir_json = local_dir + 'json/'
 
 
 # define target data path
-target_data_path = define_datafolder() + 'Data Exchange/data maintenance/' + \
-    'target data/backadjusted_target_K200f.csv'
+target_data_path = './target/backadjusted_target_K200f.csv'
 
 
 # define S3 data path
@@ -31,7 +30,7 @@ s3_data_path = 'predictions_K200f/prediction_K200f_'
 
 
 # authenticate for AWS
-role = authenticate_SMK()
+# role = authenticate_SMK()
 s3_client = boto3.client('s3')
 
 
