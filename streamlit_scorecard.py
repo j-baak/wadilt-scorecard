@@ -2,14 +2,8 @@
 import os, boto3, datetime
 import pandas as pd
 import numpy as np
-# sys.path.append('/home/lstm/Github/vault-private')
-# sys.path.append('/mnt/c/Users/jp/Documents/Github/vault-private')
-# from credentials import authenticate_SMK
 import plotly.express as px
 pd.options.plotting.backend = "plotly"
-# sys.path.append('/home/lstm/Github/jp-codes-ubuntu2/modules/') 
-# sys.path.append('/mnt/c/users/jp/Documents/Github/jp-codes-ubuntu2/modules/')        
-# from ipynb.fs.defs.module_ju_utils import define_datafolder
 import streamlit as st  # 🎈 data web app development
 from scipy import stats
 
@@ -29,17 +23,12 @@ s3_folder = 'predictions_K200f'
 s3_data_path = 'predictions_K200f/prediction_K200f_'
 
 
-# authenticate for AWS
-# role = authenticate_SMK()
-s3_client = boto3.client('s3')
-
-
 # get list of saved predicitons in json
 local_json_list = sorted([file for file in os.listdir(local_dir_json) if file.endswith('.json')])
 
 
 # download json from AWS
-s3 = boto3.resource('s3') # assumes credentials & configuration are handled outside python in .aws directory or environment variables
+s3 = boto3.resource('s3') # assumes credentials & configuration are in ./streamlit/secrets.toml file
 bucket = s3.Bucket(bucket_name)
 for obj in bucket.objects.filter(Prefix=s3_folder):
     if obj.key[-1] == '/': continue  # pass subfolder in AWS
