@@ -195,8 +195,22 @@ st.title("Wadilt Scorecard Dashboard")
 
 # content
 # contianer1 = st.container()
+
+json_loc = 'https://bucket-4-clients.s3.ap-northeast-2.amazonaws.com/predictions_K200f/prediction_K200f_yyyymmdd.json'
+png_loc = 'https://bucket-4-clients.s3.ap-northeast-2.amazonaws.com/predictions_K200f/prediction_K200f_yyyymmdd.png'
+
 st.sidebar.write('Accuracy & p-value')
 st.sidebar.dataframe(df_summary)
+st.sidebar.markdown("""---""")
+st.sidebar.write('first prediction: ' + df_pred.index[0].strftime('%Y-%m-%d'))
+st.sidebar.write('last prediction: ' + df_pred.index[-1].strftime('%Y-%m-%d'))
+st.sidebar.write('(prediction is invalid if the two models disagree)')
+
+st.markdown("""---""")
+st.write('Historical prediction data stored on AWS @: ' + json_loc)
+st.write('Historical prediction plot stored on AWS @: ' + png_loc)
+st.write('(replace "yyyymmdd" with particular date, e.g. "20220223")')
+st.markdown("""---""")
 st.write('Cumulative Accuracy')
 st.plotly_chart(fig_cum, use_container_width=True)
 st.write('Binomial Test p-value')
