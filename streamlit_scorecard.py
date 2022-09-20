@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 pd.options.plotting.backend = "plotly"
+
 import streamlit as st  # 🎈 data web app development
 from scipy import stats
 
@@ -183,7 +184,8 @@ fig_pval.update_yaxes(range=[0, 1], showgrid=True, gridwidth=0.1, griddash='dot'
 st.set_page_config(
     page_title="Wadilt Scorecard Dashboard",
     page_icon="✅",
-    layout="wide",
+    layout="wide"
+    # layout="centered"
 )
 
 
@@ -206,8 +208,85 @@ st.plotly_chart(fig10, use_container_width=True)
 st.plotly_chart(fig15, use_container_width=True)
 st.plotly_chart(fig30, use_container_width=True)
 
+# ========== Using plotly subplots ============
+# ========== can't avoid duplicate lengeds ===
+# from plotly.subplots import make_subplots
+# fig1 = make_subplots(rows=2, cols=1, subplot_titles=("Accuracy", "Binomial Test p-value"))
+# fig1.add_trace(fig_cum.data[0], row=1, col=1)
+# fig1.add_trace(fig_cum.data[1], row=1, col=1)
+# fig1.add_trace(fig_cum.data[2], row=1, col=1)
+
+# fig1.add_trace(fig_pval.data[0], row=2, col=1)
+# fig1.add_trace(fig_pval.data[1], row=2, col=1)
+# fig1.update_layout(height=800, title_text="Model Performance")
+# fig1.update_xaxes(showgrid=False)
+# fig1.update_yaxes(range=[0, 1], showgrid=True, gridwidth=0.1, griddash='dot')
  
+# fig2 = make_subplots(rows=4, cols=1, subplot_titles=("5-day span", "10-day span", "15-day span", "30-day span"))
+# fig2.add_trace(fig5.data[0], row=1, col=1)
+# fig2.add_trace(fig5.data[1], row=1, col=1)
+# fig2.add_trace(fig5.data[2], row=1, col=1)
+
+# fig2.add_trace(fig10.data[0], row=2, col=1)
+# fig2.add_trace(fig10.data[1], row=2, col=1)
+# fig2.add_trace(fig10.data[2], row=2, col=1)
+
+# fig2.add_trace(fig15.data[0], row=3, col=1)
+# fig2.add_trace(fig15.data[1], row=3, col=1)
+# fig2.add_trace(fig15.data[2], row=3, col=1)
+
+# fig2.add_trace(fig30.data[0], row=4, col=1)
+# fig2.add_trace(fig30.data[1], row=4, col=1)
+# fig2.add_trace(fig30.data[2], row=4, col=1)
+
+# fig2.update_layout(height=1000, title_text="Moving Averages of Accuracy")
+# fig2.update_xaxes(showgrid=False)
+# fig2.update_yaxes(range=[0, 1], showgrid=True, gridwidth=0.1, griddash='dot')
+
+# st.sidebar.write('Accuracy & p-value')
+# st.sidebar.dataframe(df_summary)
+
+# st.plotly_chart(fig1, use_container_width=True)
+# st.plotly_chart(fig2, use_container_width=True)
 
 
+# ================ Using pandas-bokeh =============
+# ==== groidplot doesn't work (RuntimeError: Models must be owned by only a single document,...)
+# ==== st.columns doesn't work (plot widths gets screwed up)
+# import pandas_bokeh
+# from bokeh.layouts import gridplot
+# from bokeh.plotting import output_notebook, figure, show
+# pd.set_option('plotting.backend', 'pandas_bokeh')
+# pandas_bokeh.output_notebook()
+
+# f1 = df_cum_hits.copy().plot()
+# f2 = df_pval.copy().plot()
+
+# LO = pandas_bokeh.plot_grid([[f1], [f2]])
+                        
+# LO = pandas_bokeh.plot_grid([[f1, f2]])
+# LO = gridplot([[f1, f2]], plot_width=250, plot_height=250)
+# st.bokeh_chart(LO)
+# st.write(LO)
+
+# ========================= Using Bokeh natively =============
+# ===== this example works
+# x = list(range(11))
+# y0 = x
+# y1 = [10 - i for i in x]
+# y2 = [abs(i - 5) for i in x]
+
+# s1 = figure(background_fill_color="#fafafa")
+# s1.circle(x, y0, size=12, alpha=0.8, color="#53777a")
+
+# s2 = figure(background_fill_color="#fafafa")
+# s2.triangle(x, y1, size=12, alpha=0.8, color="#c02942")
+
+# s3 = figure(background_fill_color="#fafafa")
+# s3.square(x, y2, size=12, alpha=0.8, color="#d95b43")
+
+# grid = gridplot([[s1, s2, s3]], plot_width=250, plot_height=250)
+
+# st.bokeh_chart(grid)
 
 
