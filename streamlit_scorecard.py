@@ -106,6 +106,25 @@ df_summary = pd.DataFrame([[hitrate_1030, hitrate_1130], [pvalue_1030, pvalue_11
                           columns=['K200f.1030', 'K200f.1130'], 
                           index=['hit rate', 'binom p-value']).round(3)
 
+# confusion matrix
+from sklearn.metrics import ConfusionMatrixDisplay
+# cmap: "https://matplotlib.org/stable/tutorials/colors/colormaps.html"
+
+cm1030 = ConfusionMatrixDisplay.from_predictions(
+    df_ground['O2MC1030'].apply(np.sign).apply(int), df_pred['signal'].apply(np.sign).apply(int),
+    labels=[1, -1],
+    display_labels=['up', 'down'],
+    cmap='RdYlBu'
+    # colorbar=False
+    ).figure_
+
+cm1130 = ConfusionMatrixDisplay.from_predictions(
+    df_ground['mrng_mean_PCT'].apply(np.sign).apply(int), df_pred['signal'].apply(np.sign).apply(int),
+    labels=[1, -1],
+    display_labels=['up', 'down'],
+    cmap='RdYlBu'
+    # colorbar=False
+    ).figure_
 
 # rolling hit rates: 5-day
 df_roll0 = df_hits.drop(columns=['rows'])
@@ -199,8 +218,12 @@ st.title("Wadilt Scorecard Dashboard")
 json_loc = 'https://bucket-4-clients.s3.ap-northeast-2.amazonaws.com/predictions_K200f/prediction_K200f_yyyymmdd.json'
 png_loc = 'https://bucket-4-clients.s3.ap-northeast-2.amazonaws.com/predictions_K200f/prediction_K200f_yyyymmdd.png'
 
-st.sidebar.write('Accuracy & p-value')
+st.sidebar.write('accuracy & p-value')
 st.sidebar.dataframe(df_summary)
+st.sidebar.write('confusion matrix - K200f.1030')
+st.sidebar.write(cm1030)
+st.sidebar.write('confusion matrix - K200f.1130')
+st.sidebar.write(cm1130)
 st.sidebar.markdown("""---""")
 st.sidebar.write('first prediction: ' + df_pred.index[0].strftime('%Y-%m-%d'))
 st.sidebar.write('last prediction: ' + df_pred.index[-1].strftime('%Y-%m-%d'))
