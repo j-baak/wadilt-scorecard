@@ -296,8 +296,8 @@ st.plotly_chart(fig30, use_container_width=True)
 # pd.set_option('plotting.backend', 'pandas_bokeh')
 # pandas_bokeh.output_notebook()
 
-# f1 = df_cum_hits.copy().plot()
-# f2 = df_pval.copy().plot()
+# f1 = df_cum_hits.plot()
+# f2 = df_pval.plot()
 
 # LO = pandas_bokeh.plot_grid([[f1], [f2]])
                         
@@ -305,6 +305,10 @@ st.plotly_chart(fig30, use_container_width=True)
 # LO = gridplot([[f1, f2]], plot_width=250, plot_height=250)
 # st.bokeh_chart(LO)
 # st.write(LO)
+
+# col1, col2 = st.columns(2)
+# col1.bokeh_chart(f1)
+# col2.bokeh_chart(f2)
 
 # ========================= Using Bokeh natively =============
 # ===== this example works
