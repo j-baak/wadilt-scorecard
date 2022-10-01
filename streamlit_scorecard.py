@@ -232,7 +232,7 @@ with st.expander('view data'):
     st.markdown("""---""")
     st.write('first prediction: ' + df_pred.index[0].strftime('%Y-%m-%d'))
     st.write('last prediction: ' + df_pred.index[-1].strftime('%Y-%m-%d'))
-    st.write('number of predictions: ' + str(len(df_pred)) + '(prediction is invalid if models disagree)')
+    st.write('number of predictions: ' + str(len(df_pred)) + ' (prediction is invalid if models disagree)')
 
 st.subheader('Cumulative Accuracy')
 st.plotly_chart(fig_cum, use_container_width=True)
