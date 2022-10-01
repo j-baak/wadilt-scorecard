@@ -226,17 +226,13 @@ st.sidebar.markdown("""---""")
 
 with st.expander('view data'):
     st.markdown("""---""")
-    st.write(
-        'Historical predictions data on AWS: ' + json_loc,
-        'Historical prediction plots on AWS: ' + png_loc
-        )
+    st.write('Historical predictions data on AWS: ' + json_loc)
+    st.write('Historical prediction plots on AWS: ' + png_loc)        
     st.caption('(replace "yyyymmdd" with particular date, e.g. "20220223")')
     st.markdown("""---""")
-    st.write(
-        'first prediction: ' + df_pred.index[0].strftime('%Y-%m-%d'),
-        'last prediction: ' + df_pred.index[-1].strftime('%Y-%m-%d'),
-        'number of predictions: ' + str(len(df_pred)) + ' (prediction is invalid if models disagree)'
-        )
+    st.write('first prediction: ' + df_pred.index[0].strftime('%Y-%m-%d'))
+    st.write('last prediction: ' + df_pred.index[-1].strftime('%Y-%m-%d'))
+    st.write('number of valid predictions: ' + str(len(df_pred)) + ' (prediction is invalid if models disagree)')
 
 st.subheader('Cumulative Accuracy')
 st.plotly_chart(fig_cum, use_container_width=True)
