@@ -248,6 +248,8 @@ if st.button('Load Data') or st.session_state.load_state:
     # st.sidebar.write(cm1130)
     # st.sidebar.markdown("""---""")
 
+    st.markdown("""---""")
+    
     st.subheader('accuracy & p-value')
     st.dataframe(df_summary)
     st.subheader('confusion matrix')
@@ -274,8 +276,6 @@ if st.button('Load Data') or st.session_state.load_state:
         st.write('first prediction: ' + df_pred.index[0].strftime('%Y-%m-%d'))
         st.write('last prediction: ' + df_pred.index[-1].strftime('%Y-%m-%d'))
         st.write('number of valid predictions: ' + str(len(df_pred)) + ' (prediction is invalid if models disagree)')
-
-    st.markdown("""---""")
 
     st.subheader('Cumulative Accuracy')
     st.plotly_chart(fig_cum, use_container_width=True)
