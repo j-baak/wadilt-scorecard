@@ -19,7 +19,8 @@ st.set_page_config(
 )
 
 # dashboard title
-st.title("Wadilt Scorecard Dashboard")
+# st.title("Wadilt Scorecard Dashboard")
+st.markdown("<h1 style='text-align: left; color: #1E90FF;'>Wadilt Scorecard Dashboard</h1>", unsafe_allow_html=True)
 
 if "load_state" not in st.session_state:
     st.session_state.load_state = False
@@ -250,13 +251,13 @@ if st.button('Load Data') or st.session_state.load_state:
     st.subheader('accuracy & p-value')
     st.dataframe(df_summary)
     st.subheader('confusion matrix')
-    col1, col2 = st.columns([1, 1])
-    with col1: 
+    col_1, col_2 = st.columns([1, 1])
+    with col_1: 
         # st.write('confusion matrix - K200f.1030')        
         # st.pyplot(cm_1030, bbox_inches='tight')
         st.image('cm_1030.png')
         
-    with col2:
+    with col_2:
         # st.write('confusion matrix - K200f.1130')
         # st.pyplot(cm_1130, bbox_inches='tight')
         st.image('cm_1130.png')
