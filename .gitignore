@@ -1,2 +1,4 @@
 
 streamlit/secrets.toml
+.ipynb_checkpoints/sns_cm-checkpoint.py
+__pycache__/sns_cm.cpython-39.pyc
