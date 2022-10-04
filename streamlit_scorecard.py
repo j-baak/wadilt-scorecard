@@ -282,7 +282,7 @@ if st.button('Load Data') or st.session_state.load_state:
     st.subheader('Binomial Test p-value')
     st.plotly_chart(fig_pval, use_container_width=True)     
     st.markdown("""---""")
-    st.write('Moving Averages of Accuracy')
+    st.subheader('Moving Averages of Accuracy')
     st.plotly_chart(fig5, use_container_width=True)
     st.plotly_chart(fig10, use_container_width=True)
     st.plotly_chart(fig15, use_container_width=True)
