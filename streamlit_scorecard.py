@@ -6,6 +6,7 @@ import plotly.express as px
 pd.options.plotting.backend = "plotly"
 import matplotlib.pyplot as plt
 from sns_cm import sns_confusion_matrix
+import plotly.figure_factory as ff
 
 import streamlit as st  # 🎈 data web app development
 from scipy import stats
@@ -268,7 +269,8 @@ if st.button('Load Data') or st.session_state.load_state:
     png_loc = 'https://bucket-4-clients.s3.ap-northeast-2.amazonaws.com/predictions_K200f/prediction_K200f_yyyymmdd.png'
 
     with st.expander('view data'):
-        st.dataframe(df_class)
+        # st.dataframe(df_class, width=500)  # columns widths get screwed        
+        st.plotly_chart(ff.create_table(df_class, index=True))
         st.write('Historical predictions data on AWS: ' + json_loc)
         st.write('Historical prediction plots on AWS: ' + png_loc)        
         st.caption('(replace "yyyymmdd" with particular date, e.g. "20220223")')
