@@ -14,7 +14,7 @@ from scipy import stats
 # configure streamlit
 st.set_page_config(
     page_title="Wadilt Scorecard Dashboard",
-    page_icon="✅",
+    page_icon="clipboard",
     layout="wide"
     # layout="centered"
 )
@@ -223,6 +223,9 @@ if st.button('Load Data') or st.session_state.load_state:
     fig_pval = df_pval.plot(kind='line') #, title='Binomial Test p-value')  
     fig_pval.update_xaxes(showgrid=False)
     fig_pval.update_yaxes(range=[0, 1], showgrid=True, gridwidth=0.1, griddash='dot')
+    # save fig as html
+    # fig_pval.write_html("fig_pval.html")
+    
     # fig_pval.show()
 
 
